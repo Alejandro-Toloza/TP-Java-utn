@@ -1,9 +1,6 @@
 package neoris.app.domain.impl;
 
-import neoris.app.dto.Categoria;
-import neoris.app.dto.Cliente;
-import neoris.app.dto.Producto;
-import neoris.app.dto.ProductoCliente;
+import neoris.app.dto.*;
 
 import java.util.List;
 
@@ -19,9 +16,20 @@ public class FacadeImpl {
         return dao.obtenerProductos();
     }
 
-    public List<Cliente> listCliente(int id){
+    public List<Cliente> listClienteProducto(int id){
         ClienteDAO dao = new ClienteDAO();
         return dao.obtenerClientesQueAdquirieron(id);
     }
 
+    public List<Cliente> listCliente(){
+        ClienteDAO dao = new ClienteDAO();
+        return dao.obtenerClientes();
+    }
+
+    public List<Empleado> listEmpleadosQueAntendieron(int id){
+
+        EmpleadoDAO empleado = new EmpleadoDAO();
+        return empleado.obtenerEmpleadosQueAntendieron(id);
+
+    }
 }

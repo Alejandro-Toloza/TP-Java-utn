@@ -1,10 +1,7 @@
 package neoris;
 
 import neoris.app.domain.impl.FacadeImpl;
-import neoris.app.dto.Categoria;
-import neoris.app.dto.Cliente;
-import neoris.app.dto.Producto;
-import neoris.app.dto.ProductoCliente;
+import neoris.app.dto.*;
 import neoris.app.jdbc.MiShutdownHook;
 
 import java.util.List;
@@ -24,7 +21,8 @@ public class Main {
         FacadeImpl facade = new FacadeImpl();
         double precio_unitario;
         int idCat;
-        int id_producto_sc;
+        int id_producto;
+        Integer id_cliente;
 
         //PRIMERA PANTALLA -----------------------------------------
         System.out.println("-- SELECCIONES CATEGORIA --");
@@ -52,7 +50,7 @@ public class Main {
 
         //TERCERA PANTALLA: -----------------------------
         System.out.println("SELECCIONE EL N° DE ID del producto");
-        int id_producto = scanner.nextInt();
+        id_producto = scanner.nextInt();
 
         for (Producto dto : productoDTOList) {
             if (id_producto == dto.getId_producto()) {
@@ -64,7 +62,7 @@ public class Main {
         }
 
         System.out.println("Datos de productos del cliente: ");
-        List<Cliente> productoClienteList = facade.listCliente(id_producto);
+        List<Cliente> productoClienteList = facade.listClienteProducto(id_producto);
         for (Cliente dto : productoClienteList ) {
             System.out.println("Id_cliente: " + dto.getId_cliente() + ", Nombre: " + dto.getNombre() + ",  id producto: " +
                     dto.getId_producto()  + " Descripcion: " + dto.getDescripcion() + " id_orden: " + dto.getId_orden());
@@ -72,9 +70,27 @@ public class Main {
             //list2.add(dto);
         }
 
+        System.out.println("-----PUREBA MOSTRANDOI LIOSTA CLIENTE: ");
+        List<Cliente> clienteList = facade.listCliente();
+        for (Cliente dto : clienteList ) {
+            System.out.println("Id_Cliente: "+dto.getId_cliente()+" Nombre: "+dto.getNombre()
+            +" direccio: "+dto.getDireccion()+" id_tipo_cliente: "+dto.getId_tipo_cliente()
+            +" Usuario: "+dto.getId_usuario());
+            //list2.add(dto);
+        }
+
+        System.out.println("EMPLEADOS QUE ATENDIERON UN CLIENTE SERGUN ID CLIENTE");
+        System.out.println("insertar id_cliente: ");
+        id_cliente=scanner.nextInt();
+        List<Empleado> empleadoList = facade.listEmpleadosQueAntendieron(id_cliente);
+        for(Empleado dto: empleadoList){
+            //id_cliente | nombre | id_orden | id_empleado | nombre
+                System.out.println("id_cliente: "+dto.getId_cliente()+
+                        " Nombre Empleado: "+dto.getNombre()+
+                        " id orden: "+dto.getId_orden()+
+                        " id empleado: "+dto.getId_empleado()+
+                        " Nombre Cliente: "+dto.getNombreCliente());
+            }
+        }
+
     }
-
-
-
-
-}

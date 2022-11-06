@@ -14,14 +14,14 @@ public interface Facade{
     // Caso de uso #1: CLIENTES QUE ADQUIRIERON UN PRODUCTO
     // Se debe mostrar por pantalla el listado de clientes que
     // adquirieron, al menos en una oportunidad, un producto especificado.
-    public List<Producto> obtenerProductos();
-    public List<Cliente> obtenerClientesQueAdquirieron(int idProducto);
+    public List<Producto> obtenerProductos(); //TODO: HECHO
+    public List<Cliente> obtenerClientesQueAdquirieron(int idProducto); //TODO: HECHO
 
     // Caso de uso #2: EMPLEADOS QUE ATENDIERON A UN CLIENTES
     // Se debe mostrar por pantalla el listado de empleados que
     // atendieron, al menos en una oportunidad, un cliente especificado.
-    public List<Cliente> obtenerClientes();
-    public List<Empleado> obtenerEmpleadosQueAntendieron(int idCliente);
+    public List<Cliente> obtenerClientes();//TODO: HECHO
+    public List<Empleado> obtenerEmpleadosQueAntendieron(int idCliente);//TODO: HECHO
 
     // Caso de uso #3: LISTADO DE LOS PRODUCTOS QUE TIENEN PROMOCIONES EN VIGENCIA
     // Se debe mostrar por pantalla el listado de los productos que

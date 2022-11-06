@@ -36,16 +36,34 @@ public class ClienteDAO implements Facade {
         return listDto;
     }
 
+    @Override
+    public List<Cliente> obtenerClientes() {
+
+        MiJdbc jdbc = MiJdbc.getInstance();
+        String sql="";
+        sql+="SELECT id_cliente, nombre, id_tipo_cliente, direccion, id_usuario FROM ";
+        sql+="cliente";
+
+        List<Object[]> list = jdbc.query(sql);
+        List<Cliente> listDto = new ArrayList<>();
+
+        for(Object[] fila:list){
+            Cliente dto = new Cliente();
+            dto.setId_cliente((Integer) fila[0]);
+            dto.setNombre((String) fila[1]);
+            dto.setId_tipo_cliente((Integer) fila[2]);
+            dto.setDireccion((String) fila[3]);
+            dto.setId_usuario((Integer) fila[4]);
+            listDto.add(dto);
+        }
+        return listDto;
+    }
 
     @Override
     public List<Producto> obtenerProductos() {
         return null;
     }
 
-    @Override
-    public List<Cliente> obtenerClientes() {
-        return null;
-    }
 
     @Override
     public List<Empleado> obtenerEmpleadosQueAntendieron(int idCliente) {
