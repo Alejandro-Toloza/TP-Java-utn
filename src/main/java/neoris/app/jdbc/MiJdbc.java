@@ -9,6 +9,7 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MiJdbc {
 
     private static MiJdbc instancia = null;
@@ -107,8 +108,7 @@ public class MiJdbc {
                 String driver = props.getProperty("driver");
                 String usr = props.getProperty("usr");
                 String pwd = props.getProperty("pwd");
-                */
-
+*/
                 //url=jdbc:hsqldb:hsql://localhost:9001/xdb
                 //driver=org.hsqldb.jdbcDriver
                 String url = "jdbc:mysql://localhost:3306/neoris";

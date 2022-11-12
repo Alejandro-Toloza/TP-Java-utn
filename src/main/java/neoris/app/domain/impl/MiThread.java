@@ -7,56 +7,39 @@ import neoris.app.jdbc.MiJdbc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductoDAO implements Facade {
+public class MiThread implements Facade {
 
     @Override
-    public List<Producto> obtenerProductos() {
+    public void generarReposicionProducto() {
+
         MiJdbc jdbc = MiJdbc.getInstance();
         String sql="";
-        sql+="SELECT ";
-        sql+="id_producto, ";
-        sql+="descripcion ";
-        sql+="FROM producto";
-
-        /*
-        sql+="SELECT id_producto, ";
-        sql+="descripcion, ";
-        sql+=" id_proveedor, ";
-        sql+="id_categoria, ";
-        sql+="precio_unitario, ";
-        sql+="unidades_stock ";
-        sql+="unidades_reposicion ";
-        sql+="FROM producto";*/
-
-        /*sql+="flg_discontinuo ";
-        sql+="unidades_stock_maximo ";
-        sql+="unidades_stock_minimo ";*/
-
-        /*sql+="SELECT id_producto, ";
-        sql+="descripcion, ";
-        sql+="id_categoria, ";
-        sql+="precio_unitario, ";
-        sql+="unidades_stock ";
-        sql+="FROM producto WHERE id_categoria=? ";*/
+        sql+="INSERT INTO reposicion (id_producto, cantidad,fecha)" ;
+        sql+="SELECT P.id_producto, (P.unidades_stock_maximo - P.unidades_stock) AS cantidad, CURRENT_DATE ";
+        sql+="FROM producto AS P ";
+        sql+="WHERE (P.unidades_stock < P.unidades_stock_minimo)  AND NOT EXISTS (SELECT id_producto FROM reposicion WHERE id_producto=?)";
 
 
-        //List<Object[]> list = jdbc.query(sql, Producto.getIdAux());
-        List<Object[]> list = jdbc.query(sql);
+        List<Object[]> list = jdbc.query(sql, Producto.getIdAux());
         List<Producto> listDto = new ArrayList<>();
         for(Object[] fila:list){
             Producto dto = new Producto();
             dto.setId_producto((Integer) fila[0]);
             dto.setDescripcion((String) fila[1]);
-            /*dto.setId_categoria((Integer) fila[2]);
+            dto.setId_categoria((Integer) fila[2]);
             dto.setPrecio_unitario((Double) fila[3]);;
-            dto.setUnidades_stock((Integer) fila[4]);*/
+            dto.setUnidades_stock((Integer) fila[4]);
             listDto.add(dto);
         }
-        return listDto;
+
     }
 
 
 
+    @Override
+    public List<Producto> obtenerProductos() {
+        return null;
+    }
 
     @Override
     public List<Cliente> obtenerClientesQueAdquirieron(int idProducto) {
@@ -93,9 +76,5 @@ public class ProductoDAO implements Facade {
         return null;
     }
 
-    @Override
-    public void generarReposicionProducto() {
-
-    }
 
 }

@@ -1,7 +1,7 @@
 package neoris.app.dto;
 
 // TODO : ESTA CLASE FUNCIONA COMO DTO.
-public class Producto {
+public class Producto extends ProductosVigentes{
 
     private static Integer idAux;
     private Integer id_producto;
@@ -75,5 +75,6 @@ public class Producto {
     public void setFlg_discontinuo(int flg_discontinuo) {
         this.flg_discontinuo = flg_discontinuo;
     }
+
 
 }

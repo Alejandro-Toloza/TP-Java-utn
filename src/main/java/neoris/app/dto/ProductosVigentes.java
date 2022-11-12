@@ -1,12 +1,12 @@
 package neoris.app.dto;
 
-public class Promocion extends Producto{
+public class ProductosVigentes {
 
-    private Integer id_promocion;
-    private String descripcion;
     private Integer id_promocion_vigencia;
     private Integer id_promocion_producto;
     private Integer id_producto;
+    private String descripcion;
+
 
     public Integer getId_promocion_vigencia() {
         return id_promocion_vigencia;
@@ -32,14 +32,6 @@ public class Promocion extends Producto{
         this.id_producto = id_producto;
     }
 
-    public Integer getId_promocion() {
-        return id_promocion;
-    }
-
-    public void setId_promocion(Integer id_promocion) {
-        this.id_promocion = id_promocion;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -47,4 +39,5 @@ public class Promocion extends Producto{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
 }
